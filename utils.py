@@ -1,4 +1,5 @@
 import os
+import gc
 import csv
 import warnings
 import imagesize
@@ -144,6 +145,7 @@ def convert_instance_annotations(original_annotations, images, categories, start
     
     orig0 = original_annotations[0]
     del original_annotations
+    gc.collect()
 
     imgs = {img['id']: img for img in images}
     cats = {cat['id']: cat for cat in categories}

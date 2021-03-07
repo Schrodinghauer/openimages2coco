@@ -1,4 +1,5 @@
 import os
+import gc
 import csv
 import json
 import utils
@@ -142,6 +143,7 @@ for subset in args.subsets:
     del original_image_metadata
     del original_image_annotations
     del original_image_sizes
+    gc.collect()
     # Convert instance annotations
     print('converting annotations ...')
     # Convert annotations
@@ -157,5 +159,6 @@ for subset in args.subsets:
     json.dump(oi,  open(filename, "w"))
 
     del oi
+    gc.collect()
     
     print('Done')
