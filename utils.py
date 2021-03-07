@@ -183,6 +183,8 @@ def convert_instance_annotations(original_annotations, images, categories, start
             ann[attribute.lower()] = int(original_annotations_dict[csv_line][attribute])
 
         annotations.append(ann)
+        del ann
+        gc.collect()
         
     return annotations
 
