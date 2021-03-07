@@ -183,9 +183,8 @@ def convert_instance_annotations(original_annotations, images, categories, start
             ann[attribute.lower()] = int(original_annotations_dict[csv_line][attribute])
 
         annotations.append(ann)
-        del ann
-        gc.collect()
-        
+        if (i % int(num_instances/10) == 0):
+            gc.collect()
     return annotations
 
 
