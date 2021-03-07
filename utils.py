@@ -142,13 +142,17 @@ def convert_instance_annotations(original_annotations, images, categories, start
     
     original_annotations_dict = _list_to_dict(original_annotations)
     
+    orig0 = original_annotations[0]
+    del original_annotations
+
     imgs = {img['id']: img for img in images}
     cats = {cat['id']: cat for cat in categories}
     cats_by_freebase_id = {cat['freebase_id']: cat for cat in categories}
     
     annotations = []
     
-    annotated_attributes = [attr for attr in ['IsOccluded', 'IsTruncated', 'IsGroupOf', 'IsDepiction', 'IsInside'] if attr in original_annotations[0]]
+    # annotated_attributes = [attr for attr in ['IsOccluded', 'IsTruncated', 'IsGroupOf', 'IsDepiction', 'IsInside'] if attr in original_annotations[0]]
+    annotated_attributes = [attr for attr in ['IsOccluded', 'IsTruncated', 'IsGroupOf', 'IsDepiction', 'IsInside'] if attr in orig0]
 
     num_instances = len(original_annotations_dict)
     for i in tqdm(range(num_instances), mininterval=0.5):

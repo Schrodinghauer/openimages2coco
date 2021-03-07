@@ -131,12 +131,17 @@ for subset in args.subsets:
     # Convert category information
     print('converting category info')
     oi['categories'] = utils.convert_category_annotations(original_category_info)
+    
+    del original_category_info
 
     # Convert image mnetadata
     print('converting image info ...')
     image_dir = os.path.join(base_dir, subset)
     oi['images'] = utils.convert_image_annotations(original_image_metadata, original_image_annotations, original_image_sizes, image_dir, oi['categories'], oi['licenses'])
 
+    del original_image_metadata
+    del original_image_annotations
+    del original_image_sizes
     # Convert instance annotations
     print('converting annotations ...')
     # Convert annotations
@@ -150,4 +155,7 @@ for subset in args.subsets:
     filename = os.path.join(base_dir, 'annotations/', 'openimages_{}_{}_{}.json'.format(args.version, subset, args.task))
     print('writing output to {}'.format(filename))
     json.dump(oi,  open(filename, "w"))
+
+    del oi
+    
     print('Done')
